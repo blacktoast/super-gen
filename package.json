@@ -3,6 +3,11 @@
   "displayName": "storybook-gen",
   "description": "create story book file from your component",
   "version": "0.0.1",
+  "publisher": "rettoSea",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blacktoast/storybook-gen"
+  },
   "engines": {
     "vscode": "^1.67.0"
   },
