@@ -1,5 +1,5 @@
 import { getStoryTemplate } from './template';
-import { findRootDir, getRelativePathOfComponent } from './utils';
+import { findRootDir } from './utils';
 import * as vs from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -32,13 +32,19 @@ export async function createStory(uri: vs.Uri) {
   const dirname = path.dirname(uri.fsPath);
   const baseName = path.basename(uri.fsPath);
   const storybookDirPath = getStoryDirPath(dirname);
-  const storybookFileCode = getStoryTemplate(dirname, baseName);
+  let storybookFileCode;
   let storyName;
 
   if (isFileNameIndex(baseName)) {
     storyName = `${getLastDirName(dirname)}.stories.jsx`;
+    storybookFileCode = getStoryTemplate(
+      dirname,
+      getLastDirName(dirname),
+      true
+    );
   } else {
     storyName = `${removeFileName(baseName)}.stories.jsx`;
+    storybookFileCode = getStoryTemplate(dirname, baseName, false);
   }
 
   fs.writeFile(
