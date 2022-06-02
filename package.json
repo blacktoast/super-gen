@@ -1,0 +1,62 @@
+{
+  "name": "storybook-gen",
+  "displayName": "storybook-gen",
+  "description": "create story book file from your component",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.67.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:storybook-gen.helloWorld"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "storybook-gen.helloWorld",
+        "title": "Hello World"
+      }
+    ],
+    "configuration": [
+      {
+        "title": "StoryBookGen",
+        "properties": {
+          "StoryBookGen.rootFolder": {
+            "type": "string",
+            "default": "src",
+            "description": "해당프로젝트의 소스코드가 들어있는 루트폴더 이름, 해당 이름으로 상대경로를 추적합니다"
+          },
+          "StoryBookGen.fileExtension": {
+            "type": "boolean",
+            "default": "false",
+            "description": "스토리북 코드생성시, 컴포넌트 import 파일에 .js 확장자를 붙일것인지 설정"
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.67.0",
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "14.x",
+    "@typescript-eslint/eslint-plugin": "^5.21.0",
+    "@typescript-eslint/parser": "^5.21.0",
+    "eslint": "^8.14.0",
+    "glob": "^8.0.1",
+    "mocha": "^9.2.2",
+    "typescript": "^4.6.4",
+    "@vscode/test-electron": "^2.1.3"
+  }
+}
