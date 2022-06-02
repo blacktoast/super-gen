@@ -6,9 +6,8 @@
 맥은 `cmd + shift + p`
 윈도우는 `ctrl + shift + p` 키로 명령 팔레트를 킨뒤
 
-### Create storybook
-
-명령어를 실행 시키면 됩니다
+### `Create storybook` 명령어를 실행 시키면 됩니다
+![stt](https://user-images.githubusercontent.com/10705018/171661796-c6cca8f1-03a3-4600-993d-c74aa9bfc1b4.gif)
 
 ## 주의사항
 
