@@ -10,14 +10,14 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:storybook-gen.helloWorld"
+    "onCommand:storybook-gen.createStoryBook"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "storybook-gen.helloWorld",
-        "title": "Hello World"
+        "command": "storybook-gen.createStoryBook",
+        "title": "Create storybook"
       }
     ],
     "configuration": [
@@ -28,11 +28,6 @@
             "type": "string",
             "default": "src",
             "description": "해당프로젝트의 소스코드가 들어있는 루트폴더 이름, 해당 이름으로 상대경로를 추적합니다"
-          },
-          "StoryBookGen.fileExtension": {
-            "type": "boolean",
-            "default": "false",
-            "description": "스토리북 코드생성시, 컴포넌트 import 파일에 .js 확장자를 붙일것인지 설정"
           }
         }
       }

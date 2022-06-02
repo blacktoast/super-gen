@@ -15,22 +15,15 @@ export function activate(context: vscode.ExtensionContext) {
   // The commandId parameter must match the command field in package.json
 
   let disposable = vscode.commands.registerCommand(
-    'storybook-gen.helloWorld',
+    'storybook-gen.createStoryBook',
     () => {
       // The code you place here will be executed every time your command is executed
       // Display a message box to the user
       const componentUri = vscode.window.activeTextEditor?.document.uri;
 
-      const test = vscode.workspace
-        .getConfiguration('clipboard')
-        .get('maximumClips');
-
-      vscode.window.showInformationMessage(
-        `Hello World from storybook!dd ${test}`
-      );
+      vscode.window.showInformationMessage(`create storyBook file`);
       if (componentUri) {
         createStory(componentUri);
-        console.log(componentUri);
       }
     }
   );

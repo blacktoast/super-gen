@@ -14,6 +14,7 @@ export const getRelativePathOfComponent = (dirName: string) => {
   const index = dirNames.indexOf(findRootDir());
   const test = dirNames.slice(index).join(path.sep);
   console.log(path.relative(findRootDir(), test));
+  return path.relative(findRootDir(), test);
 };
 
 // root폴더 기준으로 폴더 정리하기
