@@ -15,6 +15,7 @@
 ![stt](https://user-images.githubusercontent.com/10705018/171661796-c6cca8f1-03a3-4600-993d-c74aa9bfc1b4.gif)
 
 ### args 연동
+![sgen](https://user-images.githubusercontent.com/10705018/171869689-93f57901-a836-4957-97f5-3bb733d2baca.gif)
 
 ```
 import React from 'react';
