@@ -1,16 +1,18 @@
 {
   "name": "storybook-gen",
-  "displayName": "storybook-gen",
+  "displayName": "storybook gen",
   "description": "create story book file from your component",
   "version": "0.0.1",
   "publisher": "rettoSea",
+  "engines": {
+    "vscode": "^1.67.0"
+  },
+  "license": "(MIT or Apache-2.0)",
   "repository": {
     "type": "git",
     "url": "https://github.com/blacktoast/storybook-gen"
   },
-  "engines": {
-    "vscode": "^1.67.0"
-  },
+  "homepage": "https://github.com/blacktoast/storybook-gen/blob/main/README.md",
   "categories": [
     "Other"
   ],
@@ -22,7 +24,7 @@
     "commands": [
       {
         "command": "storybook-gen.createStoryBook",
-        "title": "Create storybook"
+        "title": "create storybook"
       }
     ],
     "configuration": [
