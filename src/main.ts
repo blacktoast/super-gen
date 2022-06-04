@@ -18,7 +18,7 @@ const getStoryDirPath = (dir: string): string => {
   const dirNames = dir.split(path.sep);
   const storyPath = dirNames
     .slice(0, dirNames.indexOf(findRootDir()) + 1)
-    .join('/');
+    .join(path.sep);
   return `${storyPath}${path.sep}stories`;
 };
 
@@ -53,7 +53,7 @@ export async function createStory(uri: vs.Uri) {
 
   const storyName = `${removeFileName(baseName)}.stories.jsx`;
 
-  const data = fs.readFileSync(`${dirname}/${fileName}`, 'utf-8');
+  const data = fs.readFileSync(`${dirname}${path.sep}${fileName}`, 'utf-8');
 
   try {
     const rowString = data.split('\n').join('');
@@ -83,8 +83,6 @@ export async function createStory(uri: vs.Uri) {
     storybookFileCode = getStoryTemplate(dirname, baseName, propTypes);
   }
 
-  console.log(propTypes);
-  console.log(storybookFileCode);
   createStoryFile(
     `${storybookDirPath}${path.sep}${storyName}`,
     storybookFileCode

@@ -16,7 +16,7 @@ export const getStoryTemplate = (
   }
 
   template = `import React from 'react';
-import ${componentName} from '../${relativePath}/${componentName}';
+import ${componentName} from '..${relativePath}/${componentName}';
 
 export default {
   title: 'Components/${componentName}',
