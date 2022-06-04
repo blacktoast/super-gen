@@ -28,13 +28,8 @@ const getLastDirName = (dir: string): string => {
 };
 
 const createStoryFile = (filePath: string, code: string) => {
-  fs.writeFile(filePath, code, function (err) {
-    if (err === null) {
-      console.log('success');
-    } else {
-      console.log('fail');
-    }
-  });
+  fs.writeFileSync(filePath, code);
+  console.log('Create ');
 };
 
 export async function createStory(uri: vs.Uri) {
@@ -58,56 +53,42 @@ export async function createStory(uri: vs.Uri) {
 
   const storyName = `${removeFileName(baseName)}.stories.jsx`;
 
-  fs.readFile(`${dirname}/${fileName}`, 'utf-8', function (err, data) {
-    if (err === null) {
-      const rowString = data.split('\n').join('');
-      console.log(regex);
+  const data = fs.readFileSync(`${dirname}/${fileName}`, 'utf-8');
 
-      if (rowString.match(regex)) {
-        const tmpProps = rowString.match(regex)[0];
-        const types = ['string', 'number', 'bool'];
-        const props = tmpProps
-          .split('{')[1]
-          .split(',')
-          .map((e) => e.trim())
-          .filter((e) => e !== '}');
+  try {
+    const rowString = data.split('\n').join('');
+    console.log(regex);
+    if (rowString.match(regex)) {
+      const tmpProps = rowString.match(regex)[0];
+      const types = ['string', 'number', 'bool'];
+      const props = tmpProps
+        .split('{')[1]
+        .split(',')
+        .map((e) => e.trim())
+        .filter((e) => e !== '}');
 
-        props
-          .map((prop) => prop.split(':'))
-          .map((item) => {
-            const [prop, type] = [item[0], item[1].trim().split('.')[1]];
-            console.log(prop, type);
-            if (type !== 'node') {
-              propTypes.set(prop, type);
-            }
-          });
-
-        storybookFileCode = getStoryTemplate(dirname, baseName, propTypes);
-        createStoryFile(
-          `${storybookDirPath}${path.sep}${storyName}`,
-          storybookFileCode
-        );
-      } else {
-        storybookFileCode = getStoryTemplate(dirname, baseName);
-
-        createStoryFile(
-          `${storybookDirPath}${path.sep}${storyName}`,
-          storybookFileCode
-        );
-      }
-    } else {
-      console.log(`${dirname}/${baseName}`);
-      storybookFileCode = getStoryTemplate(dirname, baseName);
-
-      createStoryFile(
-        `${storybookDirPath}${path.sep}${storyName}`,
-        storybookFileCode
-      );
+      props
+        .map((prop) => prop.split(':'))
+        .map((item) => {
+          const [prop, type] = [item[0], item[1].trim().split('.')[1]];
+          console.log(prop, type);
+          if (type !== 'node') {
+            propTypes.set(prop, type);
+          }
+        });
     }
-  });
+  } catch (error) {
+    console.log(error);
+  } finally {
+    storybookFileCode = getStoryTemplate(dirname, baseName, propTypes);
+  }
 
   console.log(propTypes);
   console.log(storybookFileCode);
+  createStoryFile(
+    `${storybookDirPath}${path.sep}${storyName}`,
+    storybookFileCode
+  );
 
   const focusUri = vs.Uri.parse(path.join(storybookDirPath, storyName));
   const document = await vs.workspace.openTextDocument(focusUri);

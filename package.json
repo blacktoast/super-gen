@@ -2,7 +2,7 @@
   "name": "storybook-gen",
   "displayName": "storybook gen",
   "description": "create story book file from your component",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "publisher": "rettoSea",
   "engines": {
     "vscode": "^1.67.0"
