@@ -40,9 +40,10 @@ export async function createStory(uri: vs.Uri) {
   const propTypes = new Map();
   let storybookFileCode = '';
   let baseName: string;
-
+  let isIndexFile = false;
   if (isFileNameIndex(fileName)) {
     baseName = getLastDirName(dirname);
+    isIndexFile = true;
   } else {
     baseName = fileName;
   }
@@ -57,7 +58,6 @@ export async function createStory(uri: vs.Uri) {
 
   try {
     const rowString = data.split('\n').join('');
-    console.log(regex);
     if (rowString.match(regex)) {
       const tmpProps = rowString.match(regex)[0];
       const types = ['string', 'number', 'bool'];
@@ -80,7 +80,12 @@ export async function createStory(uri: vs.Uri) {
   } catch (error) {
     console.log(error);
   } finally {
-    storybookFileCode = getStoryTemplate(dirname, baseName, propTypes);
+    storybookFileCode = getStoryTemplate(
+      dirname,
+      baseName,
+      propTypes,
+      isIndexFile
+    );
   }
 
   createStoryFile(

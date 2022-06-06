@@ -21,7 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
       // Display a message box to the user
       const componentUri = vscode.window.activeTextEditor?.document.uri;
 
-      vscode.window.showInformationMessage(`create storyBook file`);
+      vscode.window.showInformationMessage(`create storyBooddrk file`);
       if (componentUri) {
         createStory(componentUri);
       }
