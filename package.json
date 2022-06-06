@@ -2,7 +2,7 @@
   "name": "storybook-gen",
   "displayName": "storybook gen",
   "description": "create story book file from your component",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publisher": "rettoSea",
   "engines": {
     "vscode": "^1.67.0"
@@ -17,14 +17,19 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:storybook-gen.createStoryBook"
+    "onCommand:storybook-gen.createStoryBook",
+    "onCommand:storybook-gen.createStoryBookToMain1"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "storybook-gen.createStoryBook",
-        "title": "create storybook"
+        "title": "create storybook2"
+      },
+      {
+        "command": "storybook-gen.createStoryBookToMain1",
+        "title": "create storybook2 to main"
       }
     ],
     "configuration": [

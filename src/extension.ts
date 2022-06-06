@@ -20,7 +20,6 @@ export function activate(context: vscode.ExtensionContext) {
       // The code you place here will be executed every time your command is executed
       // Display a message box to the user
       const componentUri = vscode.window.activeTextEditor?.document.uri;
-
       vscode.window.showInformationMessage(`create storyBooddrk file`);
       if (componentUri) {
         createStory(componentUri);
@@ -28,7 +27,19 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  context.subscriptions.push(disposable);
+  const createStorybookToMain1 = vscode.commands.registerCommand(
+    'storybook-gen.createStoryBookToMain1',
+    async () => {
+      console.log('test');
+      const folder = await vscode.window.showInputBox({
+        title: '저장할 폴더를 입력해주세요',
+        value: '',
+      });
+      console.log(folder.trim());
+    }
+  );
+  const commands = [disposable, createStorybookToMain1];
+  context.subscriptions.push(...commands);
 }
 
 // this method is called when your extension is deactivated

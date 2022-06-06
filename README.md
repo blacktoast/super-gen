@@ -15,6 +15,7 @@
 ![stt](https://user-images.githubusercontent.com/10705018/171661796-c6cca8f1-03a3-4600-993d-c74aa9bfc1b4.gif)
 
 ### args 연동
+
 ![sgen](https://user-images.githubusercontent.com/10705018/171869689-93f57901-a836-4957-97f5-3bb733d2baca.gif)
 
 ```
@@ -76,6 +77,10 @@ src 폴더 아래에 stories 폴더가 있다는 가정하에 개발이 되었�
 초기 개발 구현
 
 ### 1.0.0
+
+### 1.0.2
+
+- storybook파일 import 경로 문제 수정
 
 ## LoadMap
 

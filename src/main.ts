@@ -54,8 +54,7 @@ export async function createStory(uri: vs.Uri) {
 
   const storyName = `${removeFileName(baseName)}.stories.jsx`;
 
-  const data = fs.readFileSync(`${dirname}${path.sep}${fileName}`, 'utf-8');
-
+  const data = fs.readFileSync(path.join(dirname, fileName), 'utf-8');
   try {
     const rowString = data.split('\n').join('');
     if (rowString.match(regex)) {
