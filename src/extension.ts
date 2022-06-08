@@ -1,7 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { createStory } from './main';
+import { createComponentDirToCurrentDir, createStory } from './main';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -26,16 +26,22 @@ export function activate(context: vscode.ExtensionContext) {
       }
     }
   );
+  let test: any = null;
 
   const createStorybookToMain1 = vscode.commands.registerCommand(
     'storybook-gen.createStoryBookToMain1',
     async () => {
-      console.log('test');
+      const componentUri = vscode.window.activeTextEditor?.document.uri;
+
       const folder = await vscode.window.showInputBox({
-        title: '저장할 폴더를 입력해주세요',
+        title: '저장할 컴포넌트 이름을 입력해주세요',
         value: '',
       });
-      console.log(folder.trim());
+      if (componentUri) {
+        createComponentDirToCurrentDir(folder, componentUri);
+      } else {
+        console.log('현재 열려있는 파일이 없습니다');
+      }
     }
   );
   const commands = [disposable, createStorybookToMain1];

@@ -18,18 +18,23 @@
   ],
   "activationEvents": [
     "onCommand:storybook-gen.createStoryBook",
-    "onCommand:storybook-gen.createStoryBookToMain1"
+    "onCommand:storybook-gen.createStoryBookToMain1",
+    "onCommand:storybook-gen.createStoryBookIn"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "storybook-gen.createStoryBook",
-        "title": "create storybook2"
+        "title": "create storybook22"
       },
       {
         "command": "storybook-gen.createStoryBookToMain1",
-        "title": "create storybook2 to main"
+        "title": "create component directory to current folder (with index.jsx, index.stories.jsx, styled.jsx)"
+      },
+      {
+        "command": "storybook-gen.createStoryBookIn",
+        "title": "create component directory in this (with index.jsx, index.stories.jsx, styled.jsx) "
       }
     ],
     "configuration": [

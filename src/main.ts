@@ -1,8 +1,14 @@
-import { getStoryTemplate } from './template';
+import {
+  getStoryTemplate,
+  getComponentTemplate,
+  getStoryTempOfIndex,
+  getStyledTemplate,
+} from './template';
 import { findRootDir } from './utils';
 import * as vs from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
+import { getPrevDirList, makePath } from './filesAndDirectorys';
 
 const removeFileName = (file: string): string => {
   return file.split('.')[0];
@@ -87,12 +93,45 @@ export async function createStory(uri: vs.Uri) {
     );
   }
 
-  createStoryFile(
-    `${storybookDirPath}${path.sep}${storyName}`,
-    storybookFileCode
-  );
+  createStoryFile(path.join(storybookDirPath, storyName), storybookFileCode);
 
   const focusUri = vs.Uri.parse(path.join(storybookDirPath, storyName));
+  const document = await vs.workspace.openTextDocument(focusUri);
+  await vs.window.showTextDocument(document);
+}
+
+export async function createComponentDirToCurrentDir(
+  componentName: string,
+  uri: vs.Uri
+) {
+  const fileList = {
+    index: 'index.jsx',
+    story: 'index.stories.jsx',
+    style: 'style.jsx',
+  };
+
+  const dirname = path.dirname(uri.fsPath);
+  const fileName = path.basename(uri.fsPath);
+  const prevDirPath = makePath(getPrevDirList(dirname), componentName);
+  console.log(vs.Uri.parse(prevDirPath));
+  await vs.workspace.fs.createDirectory(vs.Uri.parse(prevDirPath));
+
+  await vs.workspace.fs.writeFile(
+    vs.Uri.parse(makePath(prevDirPath, fileList['index'])),
+    Buffer.from(getComponentTemplate(componentName))
+  );
+
+  await vs.workspace.fs.writeFile(
+    vs.Uri.parse(makePath(prevDirPath, fileList['story'])),
+    Buffer.from(getStoryTempOfIndex(componentName))
+  );
+
+  await vs.workspace.fs.writeFile(
+    vs.Uri.parse(makePath(prevDirPath, fileList['style'])),
+    Buffer.from(getStyledTemplate())
+  );
+
+  const focusUri = vs.Uri.parse(makePath(prevDirPath, fileList['index']));
   const document = await vs.workspace.openTextDocument(focusUri);
   await vs.window.showTextDocument(document);
 }

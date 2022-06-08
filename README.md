@@ -14,6 +14,21 @@
 해당 폴더의 이름 `Text` 으로 스토리북파일이 생성됩니다
 ![stt](https://user-images.githubusercontent.com/10705018/171661796-c6cca8f1-03a3-4600-993d-c74aa9bfc1b4.gif)
 
+#### create component directory to current folder
+
+현재 에디터에 얼려있는 파일의 폴더가 있는 디렉토리에 컴포넌트 명으로 폴더를 생성합니다
+컴포넌트명으로 폴더를 생성후 그 아래 index.jsx, index.stories.jsx, styled.jsx 파일을 생성
+
+ex>
+-feats
+  - User
+    -index.js
+
+index.js이 열려있는 상태에서 명령어를 사용시 feats 폴더 아래에 원하는 제목의 폴더를 생성합니다
+
+만약 열려있는 파일이 없다면, 현재 vscode가 열려있는 폴더 기준 src 폴더를 찾아서 그 아래에
+컴포넌트 폴더를 생성합니다
+
 ### args 연동
 
 ![sgen](https://user-images.githubusercontent.com/10705018/171869689-93f57901-a836-4957-97f5-3bb733d2baca.gif)

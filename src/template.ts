@@ -7,6 +7,7 @@ export const getStoryTemplate = (
   isIndexFile = false
 ) => {
   const relativePath = getRelativePathOfComponent(dirName);
+  console.log(relativePath);
   const componentName = file.split('.')[0];
   let propTypeTemplate = ``;
   let template;
@@ -52,5 +53,47 @@ export const Default = (args) => {
 };
   `;
   }
+  return template;
+};
+
+export const getStoryTempOfIndex = (name: string) => {
+  return `
+import React from 'react';
+import ${name} from '.';
+
+export default {
+  title: 'Component/${name}',
+  component: ${name},
+  argTypes: {},
+};
+export function Default(args) {
+  return <index {...args} />;
+}
+
+  `;
+};
+
+export const getComponentTemplate = (name: string): string => {
+  const template = `
+import React from 'react';
+import * as S from './style';
+import PropTypes from 'prop-types';
+
+const ${name} = () => <div />;
+
+${name}.propTypes = {};
+
+export default ${name};
+
+  `;
+
+  return template;
+};
+
+export const getStyledTemplate = () => {
+  const template = `
+import styled from '@emotion/styled';
+`;
+
   return template;
 };
