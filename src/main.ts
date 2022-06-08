@@ -111,9 +111,7 @@ export async function createComponentDirToCurrentDir(
   };
 
   const dirname = path.dirname(uri.fsPath);
-  const fileName = path.basename(uri.fsPath);
   const prevDirPath = makePath(getPrevDirList(dirname), componentName);
-  console.log(vs.Uri.parse(prevDirPath));
   await vs.workspace.fs.createDirectory(vs.Uri.parse(prevDirPath));
 
   await vs.workspace.fs.writeFile(

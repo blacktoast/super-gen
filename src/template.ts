@@ -57,8 +57,7 @@ export const Default = (args) => {
 };
 
 export const getStoryTempOfIndex = (name: string) => {
-  return `
-import React from 'react';
+  return `import React from 'react';
 import ${name} from '.';
 
 export default {
@@ -66,6 +65,7 @@ export default {
   component: ${name},
   argTypes: {},
 };
+
 export function Default(args) {
   return <index {...args} />;
 }
@@ -74,25 +74,26 @@ export function Default(args) {
 };
 
 export const getComponentTemplate = (name: string): string => {
-  const template = `
-import React from 'react';
+  const template = `import React from 'react';
 import * as S from './style';
 import PropTypes from 'prop-types';
 
-const ${name} = () => <div />;
+const ${name} = () =>{ 
+  return (
+    <div></div>
+  )
+};
 
 ${name}.propTypes = {};
 
 export default ${name};
-
   `;
 
   return template;
 };
 
 export const getStyledTemplate = () => {
-  const template = `
-import styled from '@emotion/styled';
+  const template = `import styled from '@emotion/styled';
 `;
 
   return template;

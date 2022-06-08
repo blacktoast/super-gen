@@ -40,7 +40,9 @@ export function activate(context: vscode.ExtensionContext) {
       if (componentUri) {
         createComponentDirToCurrentDir(folder, componentUri);
       } else {
-        console.log('현재 열려있는 파일이 없습니다');
+        vscode.window.showInformationMessage(
+          '현재 열려있는 파일이 없습니다, 열려있는 파일이 있는 디렉토리를 기준으로 생성합니다 '
+        );
       }
     }
   );
