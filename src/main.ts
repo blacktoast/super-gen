@@ -102,8 +102,11 @@ export async function createStory(uri: vs.Uri) {
 
 export async function createComponentDirToCurrentDir(
   componentName: string,
-  uri: vs.Uri
+  uri: vs.Uri,
+  isIn = false
 ) {
+  let destPath;
+
   const fileList = {
     index: 'index.jsx',
     story: 'index.stories.jsx',
@@ -111,25 +114,32 @@ export async function createComponentDirToCurrentDir(
   };
 
   const dirname = path.dirname(uri.fsPath);
-  const prevDirPath = makePath(getPrevDirList(dirname), componentName);
-  await vs.workspace.fs.createDirectory(vs.Uri.parse(prevDirPath));
+  const prevDirPath = getPrevDirList(dirname);
+
+  if (isIn) {
+    destPath = makePath(dirname, componentName);
+  } else {
+    destPath = makePath(prevDirPath, componentName);
+  }
+
+  await vs.workspace.fs.createDirectory(vs.Uri.parse(destPath));
 
   await vs.workspace.fs.writeFile(
-    vs.Uri.parse(makePath(prevDirPath, fileList['index'])),
+    vs.Uri.parse(makePath(destPath, fileList['index'])),
     Buffer.from(getComponentTemplate(componentName))
   );
 
   await vs.workspace.fs.writeFile(
-    vs.Uri.parse(makePath(prevDirPath, fileList['story'])),
+    vs.Uri.parse(makePath(destPath, fileList['story'])),
     Buffer.from(getStoryTempOfIndex(componentName))
   );
 
   await vs.workspace.fs.writeFile(
-    vs.Uri.parse(makePath(prevDirPath, fileList['style'])),
+    vs.Uri.parse(makePath(destPath, fileList['style'])),
     Buffer.from(getStyledTemplate())
   );
 
-  const focusUri = vs.Uri.parse(makePath(prevDirPath, fileList['index']));
+  const focusUri = vs.Uri.parse(makePath(destPath, fileList['index']));
   const document = await vs.workspace.openTextDocument(focusUri);
   await vs.window.showTextDocument(document);
 }
