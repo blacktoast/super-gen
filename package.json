@@ -1,8 +1,8 @@
 {
-  "name": "storybook-gen",
-  "displayName": "storybook gen",
+  "name": "superset-gen",
+  "displayName": "supergen",
   "description": "create story book file from your component",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "publisher": "rettoSea",
   "engines": {
     "vscode": "^1.67.0"
@@ -10,11 +10,18 @@
   "license": "(MIT or Apache-2.0)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/blacktoast/storybook-gen"
+    "url": "https://github.com/blacktoast/super-gen"
   },
-  "homepage": "https://github.com/blacktoast/storybook-gen/blob/main/README.md",
+  "homepage": "https://github.com/blacktoast/super-gen/blob/main/README.md",
   "categories": [
     "Other"
+  ],
+  "keywords": [
+    "react",
+    "storybook",
+    "nextjs",
+    "super gen",
+    "snippet"
   ],
   "activationEvents": [
     "onCommand:storybook-gen.createStoryBook",
@@ -30,11 +37,11 @@
       },
       {
         "command": "storybook-gen.createComponentDirToCurrent",
-        "title": "create component directory to current folder (with index.jsx, index.stories.jsx, styled.jsx)"
+        "title": "create component directory into the parent folder of the current folder (with index.jsx, index.stories.jsx, styled.jsx)"
       },
       {
         "command": "storybook-gen.createComponentDirIn",
-        "title": "create component directory in this (with index.jsx, index.stories.jsx, styled.jsx) "
+        "title": "create component directory in this folder (with index.jsx, index.stories.jsx, styled.jsx) "
       }
     ],
     "configuration": [

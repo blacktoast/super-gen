@@ -1,5 +1,5 @@
-import * as vscode from 'vscode';
-import { getRelativePathOfComponent } from './utils';
+import * as vscode from "vscode";
+import { getRelativePathOfComponent } from "./utils";
 export const getStoryTemplate = (
   dirName: string,
   file: string,
@@ -8,13 +8,13 @@ export const getStoryTemplate = (
 ) => {
   const relativePath = getRelativePathOfComponent(dirName);
   console.log(relativePath);
-  const componentName = file.split('.')[0];
+  const componentName = file.split(".")[0];
   let propTypeTemplate = ``;
   let template;
   if (propTypes) {
     for (let [prop, type] of propTypes.entries()) {
-      if (type === 'bool') {
-        type = 'boolean';
+      if (type === "bool") {
+        type = "boolean";
       }
 
       propTypeTemplate += `    ${prop}: { control: "${type}" },\n`;
@@ -67,7 +67,7 @@ export default {
 };
 
 export function Default(args) {
-  return <index {...args} />;
+  return <${name} {...args} />;
 }
 
   `;
