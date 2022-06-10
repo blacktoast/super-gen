@@ -56,12 +56,12 @@ export const Default = (args) => {
   return template;
 };
 
-export const getStoryTempOfIndex = (name: string) => {
+export const getStoryTempOfIndex = (name: string, titlePath: string) => {
   return `import React from 'react';
 import ${name} from '.';
 
 export default {
-  title: 'Component/${name}',
+  title: '${titlePath}/${name}',
   component: ${name},
   argTypes: {},
 };

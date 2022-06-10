@@ -37,11 +37,11 @@
       },
       {
         "command": "storybook-gen.createComponentDirToCurrent",
-        "title": "create component directory into the parent folder of the current folder (with index.jsx, index.stories.jsx, styled.jsx)"
+        "title": "create component dir into parent folder of the current folder (with index.jsx, index.stories.jsx, styled.jsx)"
       },
       {
         "command": "storybook-gen.createComponentDirIn",
-        "title": "create component directory in this folder (with index.jsx, index.stories.jsx, styled.jsx) "
+        "title": "create component dir in this folder (with index.jsx, index.stories.jsx, styled.jsx) "
       }
     ],
     "configuration": [
