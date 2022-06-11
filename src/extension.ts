@@ -1,7 +1,8 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
-import { createComponentDirToCurrentDir, createStory } from './main';
+import * as vscode from "vscode";
+import { createCompDirToParentWoStory } from "./commands";
+import { createComponentDirToCurrentDir, createStory } from "./main";
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -15,7 +16,7 @@ export function activate(context: vscode.ExtensionContext) {
   // The commandId parameter must match the command field in package.json
 
   let disposable = vscode.commands.registerCommand(
-    'storybook-gen.createStoryBook',
+    "storybook-gen.createStoryBook",
     () => {
       // The code you place here will be executed every time your command is executed
       // Display a message box to the user
@@ -29,37 +30,56 @@ export function activate(context: vscode.ExtensionContext) {
   let test: any = null;
 
   const createComponentDirToCurrent = vscode.commands.registerCommand(
-    'storybook-gen.createComponentDirToCurrent',
+    "storybook-gen.createComponentDirToCurrent",
     async () => {
       const componentUri = vscode.window.activeTextEditor?.document.uri;
       const folder = await vscode.window.showInputBox({
-        title: '저장할 컴포넌트 이름을 입력해주세요',
-        value: '',
+        title: "저장할 컴포넌트 이름을 입력해주세요",
+        value: "",
       });
       if (componentUri) {
         createComponentDirToCurrentDir(folder, componentUri);
       } else {
         vscode.window.showInformationMessage(
-          '현재 열려있는 파일이 없습니다, 열려있는 파일이 있는 디렉토리를 기준으로 생성합니다 '
+          "현재 열려있는 파일이 없습니다, 열려있는 파일이 있는 디렉토리를 기준으로 생성합니다 "
         );
       }
     }
   );
 
   const createComponentDirInThis = vscode.commands.registerCommand(
-    'storybook-gen.createComponentDirIn',
+    "storybook-gen.createComponentDirIn",
     async () => {
       const componentUri = vscode.window.activeTextEditor?.document.uri;
       const folder = await vscode.window.showInputBox({
-        title: '저장할 컴포넌트 이름을 입력해주세요',
-        value: '',
+        title: "저장할 컴포넌트 이름을 입력해주세요",
+        value: "",
       });
 
       if (componentUri) {
         createComponentDirToCurrentDir(folder, componentUri, true);
       } else {
         vscode.window.showInformationMessage(
-          '현재 열려있는 파일이 없습니다, 열려있는 파일이 있는 디렉토리를 기준으로 생성합니다 '
+          "현재 열려있는 파일이 없습니다, 열려있는 파일이 있는 디렉토리를 기준으로 생성합니다 "
+        );
+      }
+    }
+  );
+
+  const createComponentDirInParentWoStory = vscode.commands.registerCommand(
+    "storybook-gen.createComponentDirInWoStory",
+    async () => {
+      const componentUri = vscode.window.activeTextEditor?.document.uri;
+      const folder = await vscode.window.showInputBox({
+        title: "저장할 컴포넌트 이름을 입력해주세요",
+        value: "",
+      });
+
+      if (componentUri) {
+        createComponentDirToCurrentDir(folder, componentUri);
+      } else {
+        vscode.window.showInformationMessage(
+          "현재 열려있는 파일이 없습니다, 열려있는 파일이 있는 디렉토리를 기준으로 생성합니다 "
         );
       }
     }
@@ -69,6 +89,7 @@ export function activate(context: vscode.ExtensionContext) {
     disposable,
     createComponentDirToCurrent,
     createComponentDirInThis,
+    createComponentDirInParentWoStory,
   ];
 
   context.subscriptions.push(...commands);

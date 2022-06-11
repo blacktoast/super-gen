@@ -93,8 +93,7 @@ export default ${name};
 };
 
 export const getStyledTemplate = () => {
-  const template = `import styled from '@emotion/styled';
-`;
+  const template = ``;
 
   return template;
 };

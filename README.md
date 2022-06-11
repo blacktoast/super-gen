@@ -18,7 +18,7 @@
 
 폴더로 컴포넌트를 만드는 멍령어 입니다.
 
-#### create component dir into parent folder of the current folder (with index.jsx, index.stories.jsx, styled.jsx) 명령어
+#### (dir) create component dir into parent folder of the current folder(w index.jsx, index.stories.jsx, style.jsx) 명령어
 
 현재 에디터에 얼려있는 파일의 폴더가 있는 디렉토리에 컴포넌트 명으로 폴더를 생성합니다
 컴포넌트명으로 폴더를 생성후 그 아래 index.jsx, index.stories.jsx, styled.jsx 파일을 생성
@@ -31,7 +31,11 @@ ex>
 
 index.js이 열려있는 상태에서 명령어를 사용시 feats 폴더 아래에 원하는 제목의 폴더를 생성합니다
 
-#### create component dir in this folder (with index.jsx, index.stories.jsx, styled.jsx) 명령어
+#### (dir) create component dir into parent folder of the current folder (w/o story file)
+위의 기존 `create component dir into parent folder of the current folder` 명령어와 같지만
+story파일 없이 index.jsx, style.jsx 로만 구성 폴더를 생성합니다
+ 
+#### (dir) create component dir in this folder (w index.jsx, index.stories.jsx, style.jsx)  명령어
 
 ![CreateComponent](https://user-images.githubusercontent.com/10705018/172584718-56a618bc-f4c9-46ef-a149-d94fb09b1950.gif)
 
@@ -45,6 +49,8 @@ ex>
   -index.js
 
 index.js이 열려있는 상태에서 명령어를 사용시 User 폴더 아래에 원하는 이름의 폴더를 생성합니다
+
+
 
 ### args 연동
 
@@ -120,7 +126,7 @@ src 폴더 아래에 stories 폴더가 있다는 가정하에 개발이 되었�
   - create component directory to current folder
   - create component directory in this
 
-### 1.1.0
+### 1.1.1
 
 changed the extension name story gen -> supergen
 changed the commands, please review the read me file

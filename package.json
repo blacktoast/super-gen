@@ -26,7 +26,8 @@
   "activationEvents": [
     "onCommand:storybook-gen.createStoryBook",
     "onCommand:storybook-gen.createComponentDirToCurrent",
-    "onCommand:storybook-gen.createComponentDirIn"
+    "onCommand:storybook-gen.createComponentDirIn",
+    "onCommand:storybook-gen.createComponentDirInWoStory"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -42,6 +43,10 @@
       {
         "command": "storybook-gen.createComponentDirIn",
         "title": "(dir) create component dir in this folder (w index.jsx, index.stories.jsx, style.jsx) "
+      },
+      {
+        "command": "storybook-gen.createComponentDirInWoStory",
+        "title": "(dir) create component dir into parent folder of the current folder (w/o story file)"
       }
     ],
     "configuration": [
