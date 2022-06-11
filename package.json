@@ -33,15 +33,15 @@
     "commands": [
       {
         "command": "storybook-gen.createStoryBook",
-        "title": "create storybook"
+        "title": "(file) create storybook"
       },
       {
         "command": "storybook-gen.createComponentDirToCurrent",
-        "title": "create component dir into parent folder of the current folder (with index.jsx, index.stories.jsx, styled.jsx)"
+        "title": "(dir) create component dir into parent folder of the current folder(w index.jsx, index.stories.jsx, style.jsx)"
       },
       {
         "command": "storybook-gen.createComponentDirIn",
-        "title": "create component dir in this folder (with index.jsx, index.stories.jsx, styled.jsx) "
+        "title": "(dir) create component dir in this folder (w index.jsx, index.stories.jsx, style.jsx) "
       }
     ],
     "configuration": [
