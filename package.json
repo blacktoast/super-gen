@@ -1,5 +1,5 @@
 {
-  "name": "superset-gen",
+  "name": "storybook-gen",
   "displayName": "supergen",
   "description": "create story book file from your component",
   "version": "1.1.0",
@@ -21,7 +21,7 @@
     "storybook",
     "nextjs",
     "super gen",
-    "snippet"
+    "storybook gen"
   ],
   "activationEvents": [
     "onCommand:storybook-gen.createStoryBook",
