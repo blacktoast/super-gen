@@ -24,18 +24,20 @@
 컴포넌트명으로 폴더를 생성후 그 아래 index.jsx, index.stories.jsx, styled.jsx 파일을 생성
 
 ex>
--feats
-
-- User
-  - index.js
+```
+-feats 
+  - User
+    - index.js
+```
 
 index.js이 열려있는 상태에서 명령어를 사용시 feats 폴더 아래에 원하는 제목의 폴더를 생성합니다
 
 #### (dir) create component dir into parent folder of the current folder (w/o story file)
+
 위의 기존 `create component dir into parent folder of the current folder` 명령어와 같지만
 story파일 없이 index.jsx, style.jsx 로만 구성 폴더를 생성합니다
- 
-#### (dir) create component dir in this folder (w index.jsx, index.stories.jsx, style.jsx)  명령어
+
+#### (dir) create component dir in this folder (w index.jsx, index.stories.jsx, style.jsx) 명령어
 
 ![CreateComponent](https://user-images.githubusercontent.com/10705018/172584718-56a618bc-f4c9-46ef-a149-d94fb09b1950.gif)
 
@@ -43,70 +45,54 @@ story파일 없이 index.jsx, style.jsx 로만 구성 폴더를 생성합니다
 컴포넌트명으로 폴더를 생성후 그 아래 index.jsx, index.stories.jsx, styled.jsx 파일을 생성
 
 ex>
--feats
-
-- User
-  -index.js
+```
+-feats 
+  - User
+    - index.js
+```
 
 index.js이 열려있는 상태에서 명령어를 사용시 User 폴더 아래에 원하는 이름의 폴더를 생성합니다
 
 
 
-### args 연동
-
-![sgen](https://user-images.githubusercontent.com/10705018/171869689-93f57901-a836-4957-97f5-3bb733d2baca.gif)
-
-```
-import React from 'react';
-import PropTypes from 'prop-types';
-
-const Test = ({ children, text, num }) => {
-  return <div></div>;
-};
-
-Test.propTypes = {
-  children: PropTypes.node,
-  text: PropTypes.string,
-  num: PropTypes.number,
-  test: PropTypes.bool,
-  tt: PropTypes.oneOfType(),
-};
-export default Test;
-```
-
-스토리북을 만들고자 하는 컴포넌트에서 propTypes를 지정해준 경우 해당하는 타입으로
-자동으로 스토리북 args 들어갑니다
-
-```
-import React from 'react';
-import Test from '../Components/Test';
-
-export default {
-  title: 'Components/Test',
-  component: Test,
-  argTypes: {
-    text: { control: string },
-    num: { control: number },
-    test: { control: bool },
-    tt: { control: oneOfType() },
-  },
-};
-
-export const Default = (args) => {
-  return <Test {...args}></Test>;
-};
-```
-
-## 주의사항
-
-기본적으로 rootFolder는 src 이름으로 되어있고
-src 폴더 아래에 stories 폴더가 있다는 가정하에 개발이 되었습니다.
-참고해 주세요
-
 ## Extension Settings
 
 `rootFolder` 상대 경로를 추적하기 위해서 루트 폴더명을 설정할 수 있습니다
 해당 폴더 바로아래에 stories 폴더가 존재해야 합니다
+
+`styleFileOption` 해당 옵션은 컴포넌트 폴더를 만들떄
+생성 되는 스타일 파일을 어떤 css 기반으로 만들지 설정하는 옵셥입니다
+css in js 인 이모션, styledComponent와
+css module, css 로 설정이 가능합니다
+
+아래 `options` 에 자세 설명이 되어있습니다
+fileName 은 생성되는 파일 이름
+fileContent 는 생성되는 파일의 내용입니다
+
+options :
+styledEmotion
+
+- fileName: style.jsx | style.tsx
+- file content:
+  import styled from '@emotion/styled'
+
+styled
+
+- fileName: style.jsx | style.tsx
+- file content:
+  import styled from 'styled-components'
+
+cssModule
+
+- fileName: style.module.css
+- file content:
+  none
+
+css
+
+- fileName: style.css
+- file content:
+  none
 
 ## Release Notes
 
