@@ -53,8 +53,6 @@ ex>
 
 index.js이 열려있는 상태에서 명령어를 사용시 User 폴더 아래에 원하는 이름의 폴더를 생성합니다
 
-
-
 ## Extension Settings
 
 `rootFolder` 상대 경로를 추적하기 위해서 루트 폴더명을 설정할 수 있습니다

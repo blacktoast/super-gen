@@ -3,19 +3,19 @@ import {
   getComponentTemplate,
   getStoryTempOfIndex,
   getStyledTemplate,
-} from "./template";
-import { findRootDir } from "./utils";
-import * as vs from "vscode";
-import * as path from "path";
-import * as fs from "fs";
-import { getPrevDirList, makePath } from "./filesAndDirectorys";
+} from './template';
+import { findRootDir } from './utils/utils';
+import * as vs from 'vscode';
+import * as path from 'path';
+import * as fs from 'fs';
+import { getPrevDirList, makePath } from './filesAndDirectorys';
 
 const removeFileName = (file: string): string => {
-  return file.split(".")[0];
+  return file.split('.')[0];
 };
 
 const isFileNameIndex = (name: string): boolean => {
-  if (removeFileName(name) === "index") {
+  if (removeFileName(name) === 'index') {
     return true;
   }
 };
@@ -35,7 +35,7 @@ const getLastDirName = (dir: string): string => {
 
 const createStoryFile = (filePath: string, code: string) => {
   fs.writeFileSync(filePath, code);
-  console.log("Create ");
+  console.log('Create ');
 };
 
 export async function createStory(uri: vs.Uri) {
@@ -44,7 +44,7 @@ export async function createStory(uri: vs.Uri) {
   const fileName = path.basename(uri.fsPath);
   const storybookDirPath = getStoryDirPath(dirname);
   const propTypes = new Map();
-  let storybookFileCode = "";
+  let storybookFileCode = '';
   let baseName: string;
   let isIndexFile = false;
   if (isFileNameIndex(fileName)) {
@@ -60,24 +60,24 @@ export async function createStory(uri: vs.Uri) {
 
   const storyName = `${removeFileName(baseName)}.stories.jsx`;
 
-  const data = fs.readFileSync(path.join(dirname, fileName), "utf-8");
+  const data = fs.readFileSync(path.join(dirname, fileName), 'utf-8');
   try {
-    const rowString = data.split("\n").join("");
+    const rowString = data.split('\n').join('');
     if (rowString.match(regex)) {
       const tmpProps = rowString.match(regex)[0];
-      const types = ["string", "number", "bool"];
+      const types = ['string', 'number', 'bool'];
       const props = tmpProps
-        .split("{")[1]
-        .split(",")
+        .split('{')[1]
+        .split(',')
         .map((e) => e.trim())
-        .filter((e) => e !== "}");
+        .filter((e) => e !== '}');
 
       props
-        .map((prop) => prop.split(":"))
+        .map((prop) => prop.split(':'))
         .map((item) => {
-          const [prop, type] = [item[0], item[1].trim().split(".")[1]];
+          const [prop, type] = [item[0], item[1].trim().split('.')[1]];
           console.log(prop, type);
-          if (type !== "node") {
+          if (type !== 'node') {
             propTypes.set(prop, type);
           }
         });
@@ -108,9 +108,9 @@ export async function createComponentDirToCurrentDir(
   let destPath;
 
   const fileList = {
-    index: "index.jsx",
-    story: "index.stories.jsx",
-    style: "style.jsx",
+    index: 'indexa.jsx',
+    story: 'index.stories.jsx',
+    style: 'style.jsx',
   };
 
   const dirname = path.dirname(uri.fsPath);
@@ -128,21 +128,21 @@ export async function createComponentDirToCurrentDir(
   await vs.workspace.fs.createDirectory(vs.Uri.parse(destPath));
 
   await vs.workspace.fs.writeFile(
-    vs.Uri.parse(makePath(destPath, fileList["index"])),
+    vs.Uri.parse(makePath(destPath, fileList['index'])),
     Buffer.from(getComponentTemplate(componentName))
   );
 
   await vs.workspace.fs.writeFile(
-    vs.Uri.parse(makePath(destPath, fileList["story"])),
+    vs.Uri.parse(makePath(destPath, fileList['story'])),
     Buffer.from(getStoryTempOfIndex(componentName, titlePath))
   );
 
   await vs.workspace.fs.writeFile(
-    vs.Uri.parse(makePath(destPath, fileList["style"])),
+    vs.Uri.parse(makePath(destPath, fileList['style'])),
     Buffer.from(getStyledTemplate())
   );
 
-  const focusUri = vs.Uri.parse(makePath(destPath, fileList["index"]));
+  const focusUri = vs.Uri.parse(makePath(destPath, fileList['index']));
   const document = await vs.workspace.openTextDocument(focusUri);
   await vs.window.showTextDocument(document);
 }
