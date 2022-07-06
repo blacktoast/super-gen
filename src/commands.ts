@@ -10,6 +10,7 @@ import {
   getComponentTemplate,
   getStyledTemplate,
   getStoryTempOfIndex,
+  getCompTsTemplate,
 } from './template';
 import { genFiles, getLastDirName } from './utils/files';
 import { getGenFileNameObj } from './utils/utils';
@@ -66,34 +67,23 @@ export async function createComponentDirToCurrentDirTs(
   await vs.window.showTextDocument(document);
 }
 
-export async function createCompDirToParentWoStory(
+export async function createCompFile(
   uri: vs.Uri,
   componentName: string,
-  isIn = false
+  frameworkType: string,
+  isTS = true
 ) {
-  const [fileName, dirName] = sepFileAndDirForURI(uri);
-  let destPath;
   const dirname = path.dirname(uri.fsPath);
-  const prevDirPath = getPrevDirList(dirname);
+  const madeFileName = isTS ? `${componentName}.tsx` : `${componentName}.jsx`;
+  // destPath = makePath(prevDirPath, componentName);
 
-  if (isIn) {
-    destPath = makePath(dirname, componentName);
-  } else {
-    destPath = makePath(prevDirPath, componentName);
-  }
-
-  await vs.workspace.fs.createDirectory(vs.Uri.parse(destPath));
+  // await vs.workspace.fs.createDirectory(vs.Uri.parse(destPath));
   await vs.workspace.fs.writeFile(
-    vs.Uri.parse(makePath(destPath, compSetFileList['index'])),
-    Buffer.from(getComponentTemplate(componentName))
+    vs.Uri.parse(makePath(dirname, madeFileName)),
+    Buffer.from(getCompTsTemplate(componentName, false, frameworkType))
   );
 
-  await vs.workspace.fs.writeFile(
-    vs.Uri.parse(makePath(destPath, compSetFileList['style'])),
-    Buffer.from(getStyledTemplate())
-  );
-
-  const focusUri = vs.Uri.parse(makePath(destPath, compSetFileList['index']));
+  const focusUri = vs.Uri.parse(makePath(dirname, madeFileName));
   const document = await vs.workspace.openTextDocument(focusUri);
   await vs.window.showTextDocument(document);
 }

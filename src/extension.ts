@@ -1,10 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import {
-  createCompDirToParentWoStory,
-  createComponentDirToCurrentDirTs,
-} from './commands';
+import { createCompFile, createComponentDirToCurrentDirTs } from './commands';
 import { createComponentDirToCurrentDir, createStory } from './main';
 
 // this method is called when your extension is activated
@@ -29,6 +26,10 @@ export function activate(context: vscode.ExtensionContext) {
   const frameWorkType: string = vscode.workspace
     .getConfiguration('StoryBookGen')
     .get('frameworkType');
+
+  const frameWorkTypeForFile: string = vscode.workspace
+    .getConfiguration('StoryBookGen')
+    .get('frameworkTypeForMakeFile');
 
   let disposable = vscode.commands.registerCommand(
     'storybook-gen.createStoryBook',
@@ -107,17 +108,17 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  const createComponentDirInParentWoStory = vscode.commands.registerCommand(
-    'storybook-gen.createComponentDirInWoStory',
+  const createComponentFile = vscode.commands.registerCommand(
+    'storybook-gen.createComponentFile',
     async () => {
       const componentUri = vscode.window.activeTextEditor?.document.uri;
-      const folder = await vscode.window.showInputBox({
+      const compName = await vscode.window.showInputBox({
         title: '저장할 컴포넌트 이름을 입력해주세요',
         value: '',
       });
 
       if (componentUri) {
-        createComponentDirToCurrentDir(folder, componentUri);
+        createCompFile(componentUri, compName, frameWorkTypeForFile);
       } else {
         vscode.window.showInformationMessage(
           '현재 열려있는 파일이 없습니다, 열려있는 파일이 있는 디렉토리를 기준으로 생성합니다 '
@@ -125,13 +126,12 @@ export function activate(context: vscode.ExtensionContext) {
       }
     }
   );
-
   const commands = [
     disposable,
     createComponentDirToCurrent,
     createComponentDirToCurrentTs,
     createComponentDirInThis,
-    createComponentDirInParentWoStory,
+    createComponentFile,
   ];
 
   context.subscriptions.push(...commands);

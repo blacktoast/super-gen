@@ -122,46 +122,41 @@ export const getCompTsTemplate = (
 
   const template: type = {
     react: `import React from 'react';
-    ${isStyle ? "import * as S from './style';" : ''}
+${isStyle ? "import * as S from './style';" : ''}
     
-    interface ${name}Props{
+interface ${name}Props{}
     
-    }
-    
-    export const ${name} = ({} : ${name}Props) =>{ 
-      return (
-        <div></div>
-      )
-    };
-    
-    `,
+export const ${name} = ({} : ${name}Props) =>{ 
+  return (
+    <div></div>
+  )
+};
+`,
 
     preact: `/** @jsx h */
-    import { h } from 'preact';
-    ${isStyle ? "import * as S from './style';" : ''}
+import { h } from 'preact';
+${isStyle ? "import * as S from './style';" : ''}
     
-    interface ${name}Props{
+interface ${name}Props {}
     
-    }
-    
-    export const ${name} = ({} : ${name}Props) =>{ 
-      return (
-        <div></div>
-      )
-    };
-    `,
+export const ${name} = ({} : ${name}Props) =>{ 
+    return (
+      <div></div>
+    )
+  };
+`,
 
     fresh: `/** @jsx h */
-    import { h } from 'preact';
-    import { tw } from '@twind';
+import { h } from 'preact';
+import { tw } from '@twind';
 
-    interface ${name}Props{}
+interface ${name}Props {}
     
-    export const ${name} = ({} : ${name}Props) =>{ 
-      return (
-        <div></div>
-      )
-    };
+export const ${name} = ({} : ${name}Props) =>{ 
+ return (
+    <div></div>
+  ) 
+};
     `,
   };
 

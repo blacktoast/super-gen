@@ -35,23 +35,23 @@
     "commands": [
       {
         "command": "storybook-gen.createStoryBook",
-        "title": "(file) create storybook"
+        "title": "(file story) create storybook"
       },
       {
         "command": "storybook-gen.createComponentDirToCurrent",
-        "title": "(dir js) create component dir into parent folder of the current folder(w index.jsx, index.stories.jsx, style.jsx)"
+        "title": "(dir js) create component dir in current folder"
       },
       {
         "command": "storybook-gen.createComponentDirToCurrentTs",
-        "title": "(dir ts) create TS component dir in current folder (w index, story, style file)"
+        "title": "(dir ts) create TS component dir in current folder"
       },
       {
         "command": "storybook-gen.createComponentDirIn",
-        "title": "(dir js) create component dir in this folder (w index, story, style file) "
+        "title": "(dir js) create component dir inside this folder"
       },
       {
         "command": "storybook-gen.createComponentFile",
-        "title": "create component Ts File "
+        "title": "(file ts)create component Ts File "
       }
     ],
     "configuration": [
@@ -77,6 +77,11 @@
             "type": "string",
             "default": "react",
             "description": "원하는 프레임워크에 따라 스니펫이 생성됩니다. 현재 react,preact,deno fresh가 지원됩니다."
+          },
+          "StoryBookGen.frameworkTypeForMakeFile": {
+            "type": "string",
+            "default": "fresh",
+            "description": "frameworkType옵션 과 같은 기능이지만, file 한개만 생성할때 적용됩니다."
           }
         }
       }
