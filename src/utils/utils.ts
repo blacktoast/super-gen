@@ -36,7 +36,6 @@ export const getGenFileNameObj = (
   interface style {
     [key: string]: string;
   }
-  console.log(styleFileType);
   const styleFileName: style = {
     css: 'style.css',
     cssModule: 'style.module.css',

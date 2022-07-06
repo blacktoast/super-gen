@@ -34,11 +34,10 @@ export const genFiles = async (
   const fileList = getGenFileNameObj(styleFileType, componentName, true);
 
   const isStyleFile = styleFileType.trim() !== '' ? true : false;
-  console.log(isStyleFile);
   if (isTs) {
     await vscode.workspace.fs.writeFile(
       vscode.Uri.parse(makePath(destPath, fileList['comp'])),
-      Buffer.from(getCompTsTemplate(componentName, isStyleFile))
+      Buffer.from(getCompTsTemplate(componentName, isStyleFile, frameworkType))
     );
   } else {
     await vscode.workspace.fs.writeFile(
@@ -60,7 +59,6 @@ export const genFiles = async (
   }
 
   if (styleFileType.trim() !== '') {
-    console.log('object');
     await vscode.workspace.fs.writeFile(
       vscode.Uri.parse(makePath(destPath, fileList['style'])),
       Buffer.from(getStyledTemplate(styleFileType))

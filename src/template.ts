@@ -111,23 +111,61 @@ ${name}.propTypes = {};
   return template;
 };
 
-export const getCompTsTemplate = (name: string, isStyle = true): string => {
-  const template = `import React from 'react';
-${isStyle ? "import * as S from './style';" : ''}
+export const getCompTsTemplate = (
+  name: string,
+  isStyle = true,
+  type = 'react'
+): string => {
+  interface type {
+    [key: string]: string;
+  }
 
-interface ${name}Props{
+  const template: type = {
+    react: `import React from 'react';
+    ${isStyle ? "import * as S from './style';" : ''}
+    
+    interface ${name}Props{
+    
+    }
+    
+    export const ${name} = ({} : ${name}Props) =>{ 
+      return (
+        <div></div>
+      )
+    };
+    
+    `,
 
-}
+    preact: `/** @jsx h */
+    import { h } from 'preact';
+    ${isStyle ? "import * as S from './style';" : ''}
+    
+    interface ${name}Props{
+    
+    }
+    
+    export const ${name} = ({} : ${name}Props) =>{ 
+      return (
+        <div></div>
+      )
+    };
+    `,
 
-export const ${name} = ({} : ${name}Props) =>{ 
-  return (
-    <div></div>
-  )
-};
+    fresh: `/** @jsx h */
+    import { h } from 'preact';
+    import { tw } from '@twind';
 
-`;
+    interface ${name}Props{}
+    
+    export const ${name} = ({} : ${name}Props) =>{ 
+      return (
+        <div></div>
+      )
+    };
+    `,
+  };
 
-  return template;
+  return template[type];
 };
 
 export const getIndexTemplate = (compName: string) => {

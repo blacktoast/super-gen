@@ -70,7 +70,7 @@
           },
           "StoryBookGen.storybookFile": {
             "type": "string",
-            "default": "false",
+            "default": "true",
             "description": "true일때, create component dir 명령어 실행시 storybook파일이 함께 생성 됩니다."
           },
           "StoryBookGen.frameworkType": {
