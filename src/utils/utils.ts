@@ -28,4 +28,33 @@ export const getRelativePathOfComponent = (
   }
 };
 
+export const getGenFileNameObj = (
+  styleFileType: string,
+  componentName: string,
+  isTS: true
+) => {
+  interface style {
+    [key: string]: string;
+  }
+  console.log(styleFileType);
+  const styleFileName: style = {
+    css: 'style.css',
+    cssModule: 'style.module.css',
+    styled: isTS ? 'style.tsx' : 'style.jsx',
+    styledEmotion: isTS ? 'style.tsx' : 'style.jsx',
+  };
+
+  // 뭔가 isTs가 계속 반복되네 어떻게 공통 로직으로 빼지?
+  //
+
+  return {
+    index: isTS ? 'index.ts' : 'index.js',
+    comp: isTS ? `${componentName}.tsx` : `${componentName}.jsx`,
+    story: isTS
+      ? `${componentName}.stories.tsx`
+      : `${componentName}.stories.jsx`,
+    style: styleFileType !== '' ? `${styleFileName[styleFileType]}` : '',
+  };
+};
+
 // root폴더 기준으로 폴더 정리하기

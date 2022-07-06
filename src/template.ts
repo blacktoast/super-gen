@@ -58,7 +58,7 @@ export const Default = (args) => {
 
 export const getStoryTempOfIndex = (name: string, titlePath: string) => {
   return `import React from 'react';
-import ${name} from '.';
+import {${name}} from '.';
 
 export default {
   title: '${titlePath}/${name}',
@@ -76,7 +76,7 @@ export function Default(args) {
 export const getStoryTempOfIndexTs = (name: string, titlePath: string) => {
   return `import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import ${name} from '.';
+import {${name}} from '.';
 
 export default {
   title: '${titlePath}/${name}',
@@ -92,12 +92,13 @@ Default.args = { };
  `;
 };
 
-export const getComponentTemplate = (name: string): string => {
+export const getComponentTemplate = (name: string, isStyle = true): string => {
   const template = `import React from 'react';
-import * as S from './style';
+${isStyle ? "import * as S from './style';" : ''}
+
 import PropTypes from 'prop-types';
 
-const ${name} = () =>{ 
+export const ${name} = () =>{ 
   return (
     <div></div>
   )
@@ -105,40 +106,47 @@ const ${name} = () =>{
 
 ${name}.propTypes = {};
 
-export default ${name};
-  `;
+`;
 
   return template;
 };
 
-export const getIndexTsTemplate = (name: string): string => {
+export const getCompTsTemplate = (name: string, isStyle = true): string => {
   const template = `import React from 'react';
-import * as S from './style';
+${isStyle ? "import * as S from './style';" : ''}
 
-interface Props{
+interface ${name}Props{
 
 }
 
-const ${name} = ({}:Props) =>{ 
+export const ${name} = ({} : ${name}Props) =>{ 
   return (
     <div></div>
   )
 };
 
-export default ${name};`;
+`;
 
   return template;
 };
 
-export const getStyledTemplate = (option = 'emotionStyled'): any => {
+export const getIndexTemplate = (compName: string) => {
+  return `export { ${compName} } from './${compName}';`;
+};
+
+export const getStyledTemplate = (option = 'styledEmotion'): any => {
   interface OptionType {
     [key: string]: string;
   }
   const o = option;
 
   const template: OptionType = {
-    emotionStyled: `import styled from '@emotion/styled'`,
-    styled: ``,
+    styledEmotion: `import styled from '@emotion/styled';
+    `,
+    styled: `import styled from 'styled-components';
+    `,
+    css: ``,
+    cssModule: ``,
   };
 
   return template[option];

@@ -27,8 +27,8 @@
     "onCommand:storybook-gen.createStoryBook",
     "onCommand:storybook-gen.createComponentDirToCurrent",
     "onCommand:storybook-gen.createComponentDirIn",
-    "onCommand:storybook-gen.createComponentDirInWoStory",
-    "onCommand:storybook-gen.createComponentDirToCurrentTs"
+    "onCommand:storybook-gen.createComponentDirToCurrentTs",
+    "onCommand:storybook-gen.createComponentFile"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -50,8 +50,8 @@
         "title": "(dir js) create component dir in this folder (w index, story, style file) "
       },
       {
-        "command": "storybook-gen.createComponentDirInWoStory",
-        "title": "(dir js) create component dir into parent folder of the current folder (w/o story file)"
+        "command": "storybook-gen.createComponentFile",
+        "title": "create component Ts File "
       }
     ],
     "configuration": [
@@ -70,7 +70,7 @@
           },
           "StoryBookGen.storybookFile": {
             "type": "string",
-            "default": "true",
+            "default": "false",
             "description": "true일때, create component dir 명령어 실행시 storybook파일이 함께 생성 됩니다."
           },
           "StoryBookGen.frameworkType": {

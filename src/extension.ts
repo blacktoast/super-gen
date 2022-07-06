@@ -16,13 +16,27 @@ export function activate(context: vscode.ExtensionContext) {
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with registerCommand
   // The commandId parameter must match the command field in package.json
+  const isStorybookFile: boolean =
+    vscode.workspace.getConfiguration('StoryBookGen').get('storybookFile') ===
+    'true'
+      ? true
+      : false;
+
+  const typeStyleFile: string = vscode.workspace
+    .getConfiguration('StoryBookGen')
+    .get('styleFileOption');
+
+  const frameWorkType: string = vscode.workspace
+    .getConfiguration('StoryBookGen')
+    .get('frameworkType');
+
   let disposable = vscode.commands.registerCommand(
     'storybook-gen.createStoryBook',
     () => {
       // The code you place here will be executed every time your command is executed
       // Display a message box to the user
       const componentUri = vscode.window.activeTextEditor?.document.uri;
-      vscode.window.showInformationMessage(`create storyBooddrk file`);
+      vscode.window.showInformationMessage(`create storyBook file`);
       if (componentUri) {
         createStory(componentUri);
       }
@@ -40,10 +54,14 @@ export function activate(context: vscode.ExtensionContext) {
       });
 
       if (componentUri) {
-        console.log(
-          vscode.workspace.getConfiguration('StoryBookGen.rootFolder')
+        createComponentDirToCurrentDirTs(
+          folder,
+          componentUri,
+          false,
+          isStorybookFile,
+          typeStyleFile,
+          frameWorkType
         );
-        // createComponentDirToCurrentDirTs(folder, componentUri);
       } else {
         vscode.window.showInformationMessage(
           '현재 열려있는 파일이 없습니다, 열려있는 파일이 있는 디렉토리를 기준으로 생성합니다 '

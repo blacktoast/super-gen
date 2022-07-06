@@ -35,7 +35,6 @@ const getLastDirName = (dir: string): string => {
 
 const createStoryFile = (filePath: string, code: string) => {
   fs.writeFileSync(filePath, code);
-  console.log('Create ');
 };
 
 export async function createStory(uri: vs.Uri) {

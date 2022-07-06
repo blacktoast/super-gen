@@ -24,8 +24,9 @@
 컴포넌트명으로 폴더를 생성후 그 아래 index.jsx, index.stories.jsx, styled.jsx 파일을 생성
 
 ex>
+
 ```
--feats 
+-feats
   - User
     - index.js
 ```
@@ -45,8 +46,9 @@ story파일 없이 index.jsx, style.jsx 로만 구성 폴더를 생성합니다
 컴포넌트명으로 폴더를 생성후 그 아래 index.jsx, index.stories.jsx, styled.jsx 파일을 생성
 
 ex>
+
 ```
--feats 
+-feats
   - User
     - index.js
 ```
@@ -66,6 +68,8 @@ css module, css 로 설정이 가능합니다
 아래 `options` 에 자세 설명이 되어있습니다
 fileName 은 생성되는 파일 이름
 fileContent 는 생성되는 파일의 내용입니다
+
+만약 style 파일을 만들고 싶지 않다면 해당 설정값을 비워주세요 ` `
 
 options :
 styledEmotion

@@ -11,24 +11,21 @@ import {
   getStyledTemplate,
   getStoryTempOfIndex,
 } from './template';
-import { getLastDirName } from './utils/files';
+import { genFiles, getLastDirName } from './utils/files';
+import { getGenFileNameObj } from './utils/utils';
 
 export async function createComponentDirToCurrentDirTs(
   componentName: string,
   uri: vs.Uri,
-  isIn = false
+  isIn = false,
+  isStorybook: boolean,
+  styleFileType: string,
+  frameworkType: string
 ) {
   let destPath;
-  console.log('object', isIn);
-  const fileList = {
-    index: 'indexx.tsx',
-    story: 'index.stories.tsx',
-    style: 'style.tsx',
-  };
 
   const dirname = path.dirname(uri.fsPath);
   const prevDirPath = getPrevDirList(dirname);
-
   let titlePath = getLastDirName(prevDirPath);
 
   if (isIn) {
@@ -40,22 +37,31 @@ export async function createComponentDirToCurrentDirTs(
 
   await vs.workspace.fs.createDirectory(vs.Uri.parse(destPath));
 
-  await vs.workspace.fs.writeFile(
-    vs.Uri.parse(makePath(destPath, fileList['index'])),
-    Buffer.from(getComponentTemplate(componentName))
+  await genFiles(
+    destPath,
+    titlePath,
+    isStorybook,
+    styleFileType,
+    frameworkType,
+    componentName,
+    true
   );
+  // await vs.workspace.fs.writeFile(
+  //   vs.Uri.parse(makePath(destPath, fileList['index'])),
+  //   Buffer.from(getComponentTemplate(componentName))
+  // );
 
-  await vs.workspace.fs.writeFile(
-    vs.Uri.parse(makePath(destPath, fileList['story'])),
-    Buffer.from(getStoryTempOfIndex(componentName, titlePath))
-  );
+  // await vs.workspace.fs.writeFile(
+  //   vs.Uri.parse(makePath(destPath, fileList['story'])),
+  //   Buffer.from(getStoryTempOfIndex(componentName, titlePath))
+  // );
 
-  await vs.workspace.fs.writeFile(
-    vs.Uri.parse(makePath(destPath, fileList['style'])),
-    Buffer.from(getStyledTemplate())
-  );
+  // await vs.workspace.fs.writeFile(
+  //   vs.Uri.parse(makePath(destPath, fileList['style'])),
+  //   Buffer.from(getStyledTemplate())
+  // );
 
-  const focusUri = vs.Uri.parse(makePath(destPath, fileList['index']));
+  const focusUri = vs.Uri.parse(makePath(destPath, `${componentName}.tsx`));
   const document = await vs.workspace.openTextDocument(focusUri);
   await vs.window.showTextDocument(document);
 }
