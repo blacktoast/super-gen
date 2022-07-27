@@ -74,8 +74,7 @@ export function Default(args) {
 };
 
 export const getStoryTempOfIndexTs = (name: string, titlePath: string) => {
-  return `import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+  return `import { ComponentStory, ComponentMeta } from '@storybook/react';
 import {${name}} from '.';
 
 export default {
@@ -116,13 +115,12 @@ export const getCompTsTemplate = (
   isStyle = true,
   type = 'react'
 ): string => {
-  interface type {
+  interface Type {
     [key: string]: string;
   }
 
-  const template: type = {
-    react: `import React from 'react';
-${isStyle ? "import * as S from './style';" : ''}
+  const template: Type = {
+    react: `${isStyle ? "import * as S from './style';" : ''}
     
 interface ${name}Props{}
     
