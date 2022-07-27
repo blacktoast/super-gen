@@ -121,7 +121,6 @@ export const getCompTsTemplate = (
 
   const template: Type = {
     react: `${isStyle ? "import * as S from './style';" : ''}
-    
 interface ${name}Props{}
     
 export const ${name} = ({} : ${name}Props) =>{ 

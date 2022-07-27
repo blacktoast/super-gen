@@ -47,20 +47,6 @@ export async function createComponentDirToCurrentDirTs(
     componentName,
     true
   );
-  // await vs.workspace.fs.writeFile(
-  //   vs.Uri.parse(makePath(destPath, fileList['index'])),
-  //   Buffer.from(getComponentTemplate(componentName))
-  // );
-
-  // await vs.workspace.fs.writeFile(
-  //   vs.Uri.parse(makePath(destPath, fileList['story'])),
-  //   Buffer.from(getStoryTempOfIndex(componentName, titlePath))
-  // );
-
-  // await vs.workspace.fs.writeFile(
-  //   vs.Uri.parse(makePath(destPath, fileList['style'])),
-  //   Buffer.from(getStyledTemplate())
-  // );
 
   const focusUri = vs.Uri.parse(makePath(destPath, `${componentName}.tsx`));
   const document = await vs.workspace.openTextDocument(focusUri);

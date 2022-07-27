@@ -80,7 +80,7 @@
           },
           "StoryBookGen.frameworkTypeForMakeFile": {
             "type": "string",
-            "default": "fresh",
+            "default": "react",
             "description": "frameworkType옵션 과 같은 기능이지만, file 한개만 생성할때 적용됩니다."
           }
         }
