@@ -107,7 +107,7 @@ export async function createComponentDirToCurrentDir(
   let destPath;
 
   const fileList = {
-    index: 'indexa.jsx',
+    index: 'index.jsx',
     story: 'index.stories.jsx',
     style: 'style.jsx',
   };
