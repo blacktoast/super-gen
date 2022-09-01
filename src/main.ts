@@ -38,7 +38,6 @@ const createStoryFile = (filePath: string, code: string) => {
 };
 
 export async function createStory(uri: vs.Uri) {
-  console.log(`URi : ${uri}`);
   const dirname = path.dirname(uri.fsPath);
   const fileName = path.basename(uri.fsPath);
   const storybookDirPath = getStoryDirPath(dirname);
@@ -60,6 +59,7 @@ export async function createStory(uri: vs.Uri) {
   const storyName = `${removeFileName(baseName)}.stories.jsx`;
 
   const data = fs.readFileSync(path.join(dirname, fileName), 'utf-8');
+
   try {
     const rowString = data.split('\n').join('');
     if (rowString.match(regex)) {
@@ -95,53 +95,6 @@ export async function createStory(uri: vs.Uri) {
   createStoryFile(path.join(storybookDirPath, storyName), storybookFileCode);
 
   const focusUri = vs.Uri.parse(path.join(storybookDirPath, storyName));
-  const document = await vs.workspace.openTextDocument(focusUri);
-  await vs.window.showTextDocument(document);
-}
-
-export async function createComponentDirToCurrentDir(
-  componentName: string,
-  uri: vs.Uri,
-  isIn = false
-) {
-  let destPath;
-
-  const fileList = {
-    index: 'index.jsx',
-    story: 'index.stories.jsx',
-    style: 'style.jsx',
-  };
-
-  const dirname = path.dirname(uri.fsPath);
-  const prevDirPath = getPrevDirList(dirname);
-
-  let titlePath = getLastDirName(prevDirPath);
-
-  if (isIn) {
-    titlePath = makePath(titlePath, getLastDirName(dirname));
-    destPath = makePath(dirname, componentName);
-  } else {
-    destPath = makePath(prevDirPath, componentName);
-  }
-
-  await vs.workspace.fs.createDirectory(vs.Uri.parse(destPath));
-
-  await vs.workspace.fs.writeFile(
-    vs.Uri.parse(makePath(destPath, fileList['index'])),
-    Buffer.from(getComponentTemplate(componentName))
-  );
-
-  await vs.workspace.fs.writeFile(
-    vs.Uri.parse(makePath(destPath, fileList['story'])),
-    Buffer.from(getStoryTempOfIndex(componentName, titlePath))
-  );
-
-  await vs.workspace.fs.writeFile(
-    vs.Uri.parse(makePath(destPath, fileList['style'])),
-    Buffer.from(getStyledTemplate())
-  );
-
-  const focusUri = vs.Uri.parse(makePath(destPath, fileList['index']));
   const document = await vs.workspace.openTextDocument(focusUri);
   await vs.window.showTextDocument(document);
 }
